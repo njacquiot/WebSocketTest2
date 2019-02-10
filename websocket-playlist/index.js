@@ -23,4 +23,8 @@ io.on('connection', function(socket){
     io.sockets.emit('chat', data); //on envoie les données à toutes les sockets connectées
   });
 
+  socket.on ('typing', function(data){
+    socket.broadcast.emit('typing', data) //On émet a tout le monde sauf nous
+  })
+
 });
