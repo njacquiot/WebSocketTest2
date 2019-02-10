@@ -15,6 +15,7 @@ btn.addEventListener('click', function(){
     message: message.value, //Recupere le msg
     handle: handle.value  //Recupere handle
   }); //Envoie les data aux serveurs
+  message.value = "";
 });
 
 message.addEventListener('keypress', function(e){
@@ -24,6 +25,7 @@ message.addEventListener('keypress', function(e){
       message: message.value, //Recupere le msg
       handle: handle.value  //Recupere handle
     }); //Envoie les data aux serveurs
+    message.value = "";
   }
 });
 
@@ -31,7 +33,7 @@ message.addEventListener('keypress', function(e){
 //Listen for Evenements
 socket.on('chat', function(data){
   feedback.innerHTML = '';
-  output.innerHTML += '<p><strong>' + data.handle + '</strong>' + data.message + '</p>'; //On ajoute au HTML déjà présent
+  output.innerHTML += '<p><strong>' + data.handle + '</strong> ' + data.message + '</p>'; //On ajoute au HTML déjà présent
 });
 
 
