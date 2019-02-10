@@ -15,17 +15,21 @@ btn.addEventListener('click', function(){
     message: message.value, //Recupere le msg
     handle: handle.value  //Recupere handle
   }); //Envoie les data aux serveurs
-  message.value = "";
+    message.value = '';
 });
 
-message.addEventListener('keypress', function(e){
-  socket.emit('typing', handle.value);
+
+message.addEventListener('keyup', function(e){
+    socket.emit('typing',{
+      message: message.value, //Recupere le msg
+      handle: handle.value  //Recupere handle
+    });
   if (e.keyCode == 13){
     socket.emit('chat',{
       message: message.value, //Recupere le msg
       handle: handle.value  //Recupere handle
     }); //Envoie les data aux serveurs
-    message.value = "";
+    message.value = '';
   }
 });
 
@@ -38,5 +42,9 @@ socket.on('chat', function(data){
 
 
 socket.on('typing', function(data){
-  feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+  if(data.message == ''){
+    feedback.innerHTML ='';
+  }else{
+    feedback.innerHTML = '<p><em>' + data.handle + ' is typing a message...</em></p>';
+  }
 });
